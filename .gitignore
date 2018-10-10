@@ -1,7 +1,11 @@
 .swp
 .main.c.swp
-HWCode/.vs
-HWCode/Debug
-HWCode/Release
-HWCode/HWCode/Debug
-HWCode/HWCode/Release
+HWTemple/.vs
+HWTemple/Debug
+HWTemple/Release
+HWTemple/HWTemple/Debug
+HWTemple/HWTemple/Release
+HWStore/*/*/*/Debug
+HWStore/*/*/*/Release
+HWStore/*/*/*/*/Debug
+HWStore/*/*/*/*/Release
