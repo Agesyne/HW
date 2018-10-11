@@ -151,12 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="algorithms.h" />
     <ClInclude Include="check.h" />
     <ClInclude Include="initialization.h" />
     <ClInclude Include="mainFunctions.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="algorithms.cpp" />
     <ClCompile Include="check.cpp" />
     <ClCompile Include="initialization.cpp" />
     <ClCompile Include="main.cpp" />

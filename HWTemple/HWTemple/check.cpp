@@ -1,6 +1,7 @@
 #include "pch.h"
-#include "mainFunctions.h"
 #include <iostream>
+#include "mainFunctions.h"
+#include "algorithms.h"
 
 const int debugNumber = 10;
 
