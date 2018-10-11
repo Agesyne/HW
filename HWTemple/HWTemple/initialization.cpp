@@ -1,10 +1,10 @@
 #include "pch.h"
 #include <iostream>
 
-int initNumber()
+int initNumber(char text[])
 {
 	int number = 0;
-	printf("\"Message\": ");
+	printf("%s", text);
 	scanf("%d", &number);
 	return number;
 }
