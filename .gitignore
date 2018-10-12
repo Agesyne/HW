@@ -9,3 +9,8 @@ HWStore/*/*/*/Debug
 HWStore/*/*/*/Release
 HWStore/*/*/*/*/Debug
 HWStore/*/*/*/*/Release
+CWStore/*/*/*/.vs
+CWStore/*/*/*/Debug
+CWStore/*/*/*/Release
+CWStore/*/*/*/*/Debug
+CWStore/*/*/*/*/Release
