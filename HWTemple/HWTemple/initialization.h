@@ -1,3 +1,5 @@
 #pragma once
 
-int initNumber(char[]);
+int initNumber(const char[]);
+
+void initArray(const char text[], int initingArray[], int arraySize);
