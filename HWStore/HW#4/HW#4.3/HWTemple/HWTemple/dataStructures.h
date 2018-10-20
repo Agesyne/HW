@@ -18,9 +18,9 @@ struct Node
 	int color;
 };
 
-Node leaf;
+extern Node *leaf;
 
-#define LEAF &leaf
+#define LEAF leaf
 
 struct BlackRedTree
 {
@@ -38,5 +38,6 @@ Node *findData(BlackRedTree *tree, phoneNumberRecord *data,
 					bool(*compareIfLessOrEqual)(phoneNumberRecord, phoneNumberRecord),
 						bool(*printData)(phoneNumberRecord));
 
-void printAllData(BlackRedTree *tree, Node *currentNode = nullptr,
-					const bool isWritingToFile = false, FILE *outputFile = nullptr);
+void printAllData(BlackRedTree *tree, Node *currentNode = nullptr, FILE *outputFile = nullptr);
+
+void deletetAllData(BlackRedTree *tree, Node *currentNode = nullptr);

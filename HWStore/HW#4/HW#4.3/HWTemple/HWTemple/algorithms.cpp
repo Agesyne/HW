@@ -161,12 +161,19 @@ void printBannedSymbols(char bannedSymbols[9])
 void printHelp()
 {
 	printf("Список комманд:\n");
-	printf("\t \"0\" - выйти из программы\n");
-	printf("\t \"1 Имя Номер\" (Номер в формате: +код_страны(кодгорода/сети)888-88-88) - добавить запись в БД\n");
-	printf("\t \"2 Тип-вывода\" (Тип вывода: 0 или \"\" - по именам, 1 - по номерам) - распечатать все записи в БД\n");
-	printf("\t \"3 (Имя)\" - найти телефон по имени\n");
-	printf("\t \"4 Номер\" (Номер в формате: +код_страны(кодгорода/сети)888-88-88) - найти имя по телефону\n");
-	printf("\t \"5 Имя_файла\" (Имя файла в формате: (имя).(расширение)) - сохранить БД в файл\n");
+	printf("   ->Пояснение\n"); 
+	printf("      |---------------------------------------------------------|\n");
+	printf("\tИмя писать англ буквами. Спасибо Windows\n");
+	printf("\tНомер в формате: +код_страны(код города/сети)888-88-88\n");
+	printf("\tТип вывода: 0 или \"\" - по именам, 1 - по номерам\n");
+	printf("      |---------------------------------------------------------|\n");
+	printf("   ->Выйти из программы:\t\"0\"\n");
+	printf("   ->Добавить запись в БД:\t\"1 Имя Номер\"\n");
+	printf("   ->Распечатать всю БД:\t\"2 Тип_вывода\" \n");
+	printf("   ->Найти номер по имени:\t\"3 Имя\"\n");
+	printf("   ->Найти имя по номеру:\t\"4 Номер\"\n");
+	printf("   ->Сохранить БД в файл:\t\"5 Имя_файла Тип_вывода\"\n");
+
 	printf("\n");
 }
 
@@ -213,6 +220,11 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 			{
 				printf("Лишний аргумент команды: (%s)\n", dataFromString);
 				printHelp();
+				for (int i = 0; i < maxNumberCommandArgument; i++)
+				{
+					delete[] commandArgument[i];
+				}
+				delete[] dataFromString;
 				return;
 			}
 			commandArgument[dataCounter++] = dataFromString;
@@ -227,6 +239,10 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 	{
 		printf("Неверный номер комманды: %s\n", commandArgument[0]);
 		printHelp();
+		for (int i = 0; i < maxNumberCommandArgument; i++)
+		{
+			delete[] commandArgument[i];
+		}
 		return;
 	}
 	*commandNumber = commandArgument[0][0] - '0';
@@ -238,6 +254,7 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 	int urlLength = 0;
 	char bannedSymbols[9] = { '\\', '/' , '|' ,':','*', '?' , '\"', '<', '>' };
 	bool isDotAppeared = false;
+	bool isBadSymbolsInURL = false;
 	switch (*commandNumber)
 	{
 		case 0:
@@ -333,7 +350,7 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 			if (askedData == nullptr || askedData == LEAF)
 			{
 				printf("Такого человека нет в БД\n");
-				return;
+				break;
 			}
 		break;
 
@@ -386,14 +403,26 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 					{
 						printf("Недопустимые символы в названии файла: %s\n", commandArgument[1]);
 						printBannedSymbols(bannedSymbols);
+						isBadSymbolsInURL = true;
 						break;
+						//А здесь можно goto, чтобы флаг и доп. проверку снизу не делать? 
 					}
+				}
+
+				if (isBadSymbolsInURL)
+				{
+					break;
 				}
 
 				if (commandArgument[1][i] == '.')
 				{
 					isDotAppeared = true;
 				}
+			}
+
+			if (isBadSymbolsInURL)
+			{
+				break;
 			}
 
 			if (!isDotAppeared)
@@ -413,7 +442,6 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 			else
 			{
 				printf("Неверный аргумент комманды: (%s)\n", commandArgument[2]);
-				printBannedSymbols(bannedSymbols);
 				break;
 			}
 
@@ -426,4 +454,8 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 		break;
 	}
 	delete newRecord;
+	for (int i = 0; i < maxNumberCommandArgument; i++)
+	{
+		delete[] commandArgument[i];
+	}
 }

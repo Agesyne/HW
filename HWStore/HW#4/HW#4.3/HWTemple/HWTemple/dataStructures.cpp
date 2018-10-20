@@ -21,10 +21,9 @@ struct Node
 	int color;
 };
 
-//Node *leaf = new Node{ phoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
-Node leaf { phoneNumberRecord{}, &leaf, &leaf, nullptr, BLACK };
+Node *leaf = new Node{ phoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
 
-#define LEAF &leaf
+#define LEAF leaf
 
 struct BlackRedTree
 {
@@ -61,7 +60,7 @@ void rotateLeft(BlackRedTree *tree, Node *rotatingNode)
 	}
 	else
 	{
-		tree->root = rotatingNode;
+		tree->root = rightSubTree;
 	}
 
 	rightSubTree->left = rotatingNode;
@@ -109,6 +108,7 @@ void rotateRight(BlackRedTree *tree, Node *rotatingNode)
 	}
 }
 
+
 void insertFixup(BlackRedTree *tree ,Node *checkingNode)
 {
 	while (checkingNode != tree->root && checkingNode->parent->color == RED)
@@ -150,8 +150,8 @@ void insertFixup(BlackRedTree *tree ,Node *checkingNode)
 			{
 				if (checkingNode == checkingNode->parent->left)
 				{
-					checkingNode->parent;
-					rotateRight(tree ,checkingNode);
+					checkingNode = checkingNode->parent;
+					rotateRight(tree, checkingNode);
 				}
 
 				checkingNode->parent->color = BLACK;
@@ -162,6 +162,8 @@ void insertFixup(BlackRedTree *tree ,Node *checkingNode)
 	}
 	tree->root->color = BLACK;
 }
+
+
 
 Node *insertNode(BlackRedTree *insertingTree, phoneNumberRecord *data, 
 						bool (*compareIfLessOrEqual)(phoneNumberRecord, phoneNumberRecord))
@@ -410,8 +412,7 @@ Node *findData(BlackRedTree *tree, phoneNumberRecord *data,
 	return current;
 }
 
-void printAllData(BlackRedTree *tree, Node *currentNode = nullptr, 
-					const bool isWritingToFile = false, FILE *outputFile = nullptr)
+void printAllData(BlackRedTree *tree, Node *currentNode = nullptr, FILE *outputFile = nullptr)
 {
 	if (currentNode == nullptr)
 	{
@@ -420,10 +421,10 @@ void printAllData(BlackRedTree *tree, Node *currentNode = nullptr,
 
 	if (currentNode->left != LEAF)
 	{
-		printAllData(tree, currentNode->left, isWritingToFile, outputFile);
+		printAllData(tree, currentNode->left, outputFile);
 	}
 
-	if (!isWritingToFile)
+	if (outputFile == nullptr)
 	{
 		printf("Имя: %s\tНомер: %s\n", currentNode->data.name, currentNode->data.phoneNumber);
 	}
@@ -434,6 +435,27 @@ void printAllData(BlackRedTree *tree, Node *currentNode = nullptr,
 
 	if (currentNode->right != LEAF)
 	{
-		printAllData(tree, currentNode->right, isWritingToFile, outputFile);
+		printAllData(tree, currentNode->right, outputFile);
 	}
+}
+
+void deletetAllData(BlackRedTree *tree, Node *currentNode = nullptr)
+{
+	if (currentNode == nullptr)
+	{
+		currentNode = tree->root;
+	}
+
+	if (currentNode->left != LEAF)
+	{
+		deletetAllData(tree, currentNode->left);
+	}
+
+	if (currentNode->right != LEAF)
+	{
+		deletetAllData(tree, currentNode->right);
+	}
+
+	tree->size--;
+	delete currentNode;
 }

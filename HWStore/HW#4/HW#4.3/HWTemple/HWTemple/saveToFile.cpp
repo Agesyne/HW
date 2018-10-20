@@ -17,7 +17,15 @@ void saveDataBaseToFile(const char text[], BlackRedTree *dataBaseByName)
 {
 	FILE *outputFile = fopen(text, "w");
 
-	printAllData(dataBaseByName, nullptr, true, outputFile);
+	if (outputFile != nullptr)
+	{
+		printAllData(dataBaseByName, nullptr, outputFile);
+	}
+	else
+	{
+		printf("Не удалось создать файл с именем %s\n", text);
+		return;
+	}
 
 	fclose(outputFile);
 }
