@@ -2,6 +2,7 @@
 #include <iostream>
 #include "main.h"
 
+
 int pow2(const int degree)
 {
 	int number = 1;
@@ -80,6 +81,7 @@ int *addBitNumbers(const int bitNumber1[], const int bitNumber2[], const int len
 
 int twosComplementToDec(int addResult[], const int addResultLength)
 {
+	setlocale(LC_ALL, "RUS");
 	int resultNumber = 0;
 	int bitMask = 1;
 	int sign = 1;
