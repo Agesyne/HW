@@ -154,7 +154,6 @@
     <ClInclude Include="algorithms.h" />
     <ClInclude Include="check.h" />
     <ClInclude Include="initialization.h" />
-    <ClInclude Include="mainFunctions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="readFile.h" />
   </ItemGroup>
@@ -172,7 +171,7 @@
     <ClCompile Include="readFile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data.txt" />
+    <Text Include="checkData.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
