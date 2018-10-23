@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "mainFunctions.h"
+#include "main.h"
 #include "algorithms.h"
 #include "readFile.h"
 #include <string.h>
@@ -68,10 +68,15 @@ void checkFromFile()
 				{
 					printf("Wrong calculating\n");
 				}
+				for (int i = linesCounter; i < linesRead; i++)
+				{
+					delete[] data[i];
+				}
 				delete[] enteredArray;
 				exit(1);
 			}
 
 		delete[] enteredArray;
+		delete[] data[linesCounter];
 	}
 }

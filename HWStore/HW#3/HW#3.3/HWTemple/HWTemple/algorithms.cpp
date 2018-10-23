@@ -1,6 +1,6 @@
 #include "pch.h"
 #include <iostream>
-#include "mainFunctions.h"
+#include "main.h"
 
 
 int partition(int sortingArray[], const int low, const int high)
