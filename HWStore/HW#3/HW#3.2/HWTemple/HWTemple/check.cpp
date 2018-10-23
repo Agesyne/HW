@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "mainFunctions.h"
+#include "main.h"
 #include "algorithms.h"
 #include <iostream>
 
