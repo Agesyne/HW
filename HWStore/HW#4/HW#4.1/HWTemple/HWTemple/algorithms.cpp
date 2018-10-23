@@ -1,6 +1,6 @@
 #include "pch.h"
 #include <iostream>
-#include "mainFunctions.h"
+#include "main.h"
 
 int pow2(const int degree)
 {

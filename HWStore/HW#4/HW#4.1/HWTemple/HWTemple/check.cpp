@@ -1,6 +1,6 @@
 #include "pch.h"
 #include <iostream>
-#include "mainFunctions.h"
+#include "main.h"
 #include "algorithms.h"
 #include "readFile.h"
 
