@@ -1,6 +1,6 @@
 #include "pch.h"
 #include <iostream>
-#include "mainFunctions.h"
+#include "main.h"
 #include "algorithms.h"
 #include "readFile.h"
 
@@ -38,10 +38,15 @@ void checkFromFile()
 		if (!isSorted(enteredArray, arraySize))
 		{
 			printf("Где-то ошибки");
+			for (int i = linesCounter; i < linesRead; ++i)
+			{
+				delete[] data[i];
+			}
 			delete[] enteredArray;
 			exit(1);
 		}
 
+		delete[] data[linesCounter];
 		delete[] enteredArray;
 	}
 }
