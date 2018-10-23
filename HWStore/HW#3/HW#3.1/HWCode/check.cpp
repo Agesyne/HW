@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "qsort.h"
-#include "mainFunctions.h"
+#include "main.h"
 #include <iostream>
 
 const int debugNumber = 100;

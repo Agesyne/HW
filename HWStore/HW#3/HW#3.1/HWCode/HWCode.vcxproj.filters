@@ -27,10 +27,10 @@
     <ClInclude Include="check.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="mainFunctions.h">
+    <ClInclude Include="initialization.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="initialization.h">
+    <ClInclude Include="main.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

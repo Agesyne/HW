@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "mainFunctions.h"
+#include "main.h"
 
 void insertionSort(int sortingArray[], const int low, const int high, const int size)
 {
