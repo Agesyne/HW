@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="checkData.txt">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
 </Project>

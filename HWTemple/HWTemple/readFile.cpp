@@ -18,6 +18,7 @@ int readFile(const char text[], char *data[100])
 		char *readBytes = fgets(buffer, sizeof(char) * 100, inputDataFile);
 		if (readBytes == nullptr)
 		{
+			delete[] buffer;
 			break;
 		}
 		data[linesRead++] = buffer;
