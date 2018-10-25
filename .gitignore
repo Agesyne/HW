@@ -5,6 +5,9 @@ HWTemple/Debug
 HWTemple/Release
 HWTemple/HWTemple/Debug
 HWTemple/HWTemple/Release
+HWStore/*/*/.vs
+HWStore/*/*/Debug
+HWStore/*/*/Release
 HWStore/*/*/*/.vs
 HWStore/*/*/*/Debug
 HWStore/*/*/*/Release
