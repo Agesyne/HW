@@ -198,8 +198,8 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 			for (int i = 0;;)
 			{
 				bool isStillData = (buffer[charCounter + i] != ' ')
-					&& (buffer[charCounter + i] != '\n')
-					&& (buffer[charCounter + i] != '\0');
+								&& (buffer[charCounter + i] != '\n')
+								&& (buffer[charCounter + i] != '\0');
 				if (isStillData)
 				{
 					i++;
