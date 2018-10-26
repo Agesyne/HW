@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <iostream>
+#include "readFile.h"
 
 int readFile(const char text[], char *data[100])
 {

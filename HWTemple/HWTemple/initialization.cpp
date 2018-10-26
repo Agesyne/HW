@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <iostream>
+#include "initialization.h"
 
 int initNumber(const char text[])
 {
