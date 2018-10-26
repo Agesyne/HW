@@ -23,11 +23,23 @@ void checkFromFile()
 	char *data[100] = {};
 	const int linesRead = readFile("checkData.txt", data);
 
+	
+	//char *results[100] = {};
+	//const int linesResultRead = readFile("checkResults.txt", results);
+
 	for (int linesCounter = 0; linesCounter < linesRead; linesCounter++)
 	{
 		if (0)
 		{
+			for (int i = linesCounter; i < linesRead; ++i)
+			{
+				delete data[i];
+			}
 			exit(1);
 		}
+
+
+		delete data[linesCounter];
 	}
+
 }
