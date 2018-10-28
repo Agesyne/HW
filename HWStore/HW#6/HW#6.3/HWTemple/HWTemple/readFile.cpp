@@ -1,30 +1,26 @@
 #include "pch.h"
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
 #include "readFile.h"
-
-int readFile(const char text[], char *data[100])
+using namespace std;
+int readFile(string text, vector<string> &data)
 {
-	FILE *inputDataFile = fopen(text, "r");
-	if (!inputDataFile)
+	ifstream inputDataFile(text, ios::in);
+	if (!inputDataFile.is_open())
 	{
-		printf("File not fount");
-		exit(1);
+		cout << "File not found!" << endl;
+		return 1;
 	}
-
-	int linesRead = 0;
-
-	while (!feof(inputDataFile))
-	{
-		char *buffer = new char[100];
-		char *readBytes = fgets(buffer, sizeof(char) * 100, inputDataFile);
-		if (readBytes == nullptr)
+	while (!inputDataFile.eof()) {
+		string buffer;
+		inputDataFile >> buffer;
+		if (buffer == "")
 		{
-			delete[] buffer;
-			break;
+			continue;
 		}
-		data[linesRead++] = buffer;
+		data.push_back(buffer);
 	}
-
-	fclose(inputDataFile);
-	return linesRead;
+	inputDataFile.close();
 }

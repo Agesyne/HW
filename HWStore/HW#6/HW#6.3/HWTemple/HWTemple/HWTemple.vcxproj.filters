@@ -56,18 +56,15 @@
     <ClCompile Include="readFile.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Stack.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="StackElement.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="checkData.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="data.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="resultData.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

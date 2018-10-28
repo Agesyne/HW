@@ -171,12 +171,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="readFile.cpp" />
-    <ClCompile Include="Stack.cpp" />
-    <ClCompile Include="StackElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="checkData.txt" />
     <Text Include="data.txt" />
+    <Text Include="resultData.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
