@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "algorithms.h"
 #include <iostream>
-#include <stack>
+#include "Stack.h"
 #include <string>
 using namespace std;
 
@@ -54,7 +54,7 @@ char getReverseBracket(const char symbol)
 
 bool isCorrectBracketsString(string &checkingString)
 {
-	stack<char> bracketsStack;
+	Stack<char> bracketsStack;
 	if (checkingString.back() == '\n')
 	{
 		checkingString.erase(checkingString.end() - 1);
@@ -64,21 +64,21 @@ bool isCorrectBracketsString(string &checkingString)
 	{
 		if (isOpeningBracket(symbol))
 		{
-			bracketsStack.emplace(symbol);
+			bracketsStack.push(symbol);
 		}
 		else
 		{
-			if (bracketsStack.empty())
+			if (bracketsStack.isEmpty())
 			{
 				return false;
 			}
-			if (bracketsStack.top() == getReverseBracket(symbol))
+			if (bracketsStack.peak() == getReverseBracket(symbol))
 			{
 				bracketsStack.pop();
 			}
 		}
 	}
-	if (!bracketsStack.empty())
+	if (!bracketsStack.isEmpty())
 	{
 		return false;
 	}

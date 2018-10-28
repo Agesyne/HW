@@ -156,6 +156,8 @@
     <ClInclude Include="initialization.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="readFile.h" />
+    <ClInclude Include="Stack.h" />
+    <ClInclude Include="StackElement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="algorithms.cpp" />
