@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "algorithms.h"
-#include <stack>
+#include "Stack.h"
 #include <iostream>
 using namespace std;
 
@@ -25,13 +25,13 @@ int max(const int number1, const int number2)
 
 int calculatePostFixForm(string &inputCalculatingData)
 {
-	stack<int> calculatingStack;
+	Stack<int> calculatingStack;
 
 	for (const char &i : inputCalculatingData)
 	{
 		if (isdigit(i))
 		{
-			calculatingStack.emplace(static_cast<int>(i) - '0');
+			calculatingStack.push(static_cast<int>(i) - '0');
 		}
 		else
 		{
@@ -40,43 +40,43 @@ int calculatePostFixForm(string &inputCalculatingData)
 			switch (i)
 			{
 			case '+':
-				operand2 = calculatingStack.top();
+				operand2 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				operand1 = calculatingStack.top();
+				operand1 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				calculatingStack.emplace(operand1 + operand2);
+				calculatingStack.push(operand1 + operand2);
 			break;
 
 			case '-':
-				operand2 = calculatingStack.top();
+				operand2 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				operand1 = calculatingStack.top();
+				operand1 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				calculatingStack.emplace(operand1 - operand2);
+				calculatingStack.push(operand1 - operand2);
 			break;
 
 			case '*':
-				operand2 = calculatingStack.top();
+				operand2 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				operand1 = calculatingStack.top();
+				operand1 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				calculatingStack.emplace(operand1 * operand2);
+				calculatingStack.push(operand1 * operand2);
 			break;
 
 			case '/':
-				operand2 = calculatingStack.top();
+				operand2 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				operand1 = calculatingStack.top();
+				operand1 = calculatingStack.peak();
 				calculatingStack.pop();
 
-				calculatingStack.emplace(operand1 / operand2);
+				calculatingStack.push(operand1 / operand2);
 				break;
 
 			case ' ':
@@ -85,7 +85,7 @@ int calculatePostFixForm(string &inputCalculatingData)
 		}
 	}
 	
-	int result = calculatingStack.top();
+	int result = calculatingStack.peak();
 	calculatingStack.pop();
 	return result;
 }
