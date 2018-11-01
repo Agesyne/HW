@@ -1,3 +1,7 @@
 #pragma once
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
 
-int readFile(const char url[], char *data[100]);
+int readFile(string text, vector<string> &data);

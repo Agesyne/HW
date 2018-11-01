@@ -1,5 +1,9 @@
 #pragma once
+#include <iostream>
+#include <string>
+using namespace std;
 
-int initNumber(const char[]);
+int initNumber(string text);
 
-void initArray(const char text[], int initingArray[], int arraySize);
+template<std::size_t SIZE>
+void initArray(string text, array<int, SIZE>& initingArray);
