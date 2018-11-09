@@ -15,3 +15,4 @@ CWStore/*/*/*/Debug
 CWStore/*/*/*/Release
 CWStore/*/*/*/*/Debug
 CWStore/*/*/*/*/Release
+**/*.user
