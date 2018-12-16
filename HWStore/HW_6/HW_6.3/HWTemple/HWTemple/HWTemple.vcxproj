@@ -103,7 +103,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -156,6 +156,8 @@
     <ClInclude Include="initialization.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="readFile.h" />
+    <ClInclude Include="Stack.h" />
+    <ClInclude Include="StackElement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="algorithms.cpp" />

@@ -25,10 +25,9 @@ int getPriority(const char symbol)
 	}
 }
 
-string translateToPostfix(string infixString)
+string translateToPostfix(const string &infixString)
 {
 	string postfix = "";
-	//Stack<char> *operatorStack = new Stack<char>();
 	Stack<char> operatorStack;
 	operatorStack.push('#');
 	
@@ -84,7 +83,6 @@ string translateToPostfix(string infixString)
 		postfix.push_back(operatorStack.peak());
 		operatorStack.pop();
 	}
-	//operatorStack->~Stack;
 
 	return postfix;
 }
