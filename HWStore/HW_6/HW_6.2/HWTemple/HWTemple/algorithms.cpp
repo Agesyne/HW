@@ -5,24 +5,6 @@
 #include <string>
 using namespace std;
 
-void swap(int *a, int *b)
-{
-	int tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-int max(const int number1, const int number2)
-{
-	if (number2 < number1)
-	{
-		return number1;
-	}
-	else
-	{
-		return number2;
-	}
-}
 
 bool isOpeningBracket(const char symbol)
 {
@@ -78,9 +60,6 @@ bool isCorrectBracketsString(string &checkingString)
 			}
 		}
 	}
-	if (!bracketsStack.isEmpty())
-	{
-		return false;
-	}
-	return true;
+
+	return ((bracketsStack.isEmpty()) ? true : false);
 }

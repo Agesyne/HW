@@ -4,7 +4,6 @@
 #include "StackElement.h"
 
 
-//extern class StackElement;
 
 template<typename T>
 class Stack
@@ -14,7 +13,7 @@ private:
 	StackElement<T> *top = nullptr;
 public:
 	//конструктор
-	Stack<T>(size_t sizeN = 0, StackElement<T> *topN = nullptr)
+	explicit Stack<T>(size_t sizeN = 0, StackElement<T> *topN = nullptr)
 	{
 		size = sizeN;
 		top = topN;
@@ -30,13 +29,9 @@ public:
 	}
 
 	//проверка пустоты
-	bool isEmpty()
+	bool isEmpty() const
 	{
-		if (size == 0)
-		{
-			return true;
-		}
-		return false;
+		return size == 0;
 	}
 
 	//добавить элемент
@@ -53,27 +48,27 @@ public:
 		if (!isEmpty())
 		{
 			StackElement<T> *deletingElement = top;
-			top = top->prev;
+			top = top->getPrev();
 			delete deletingElement;
 			--size;
 		}
 		else
 		{
-			cout << "Stack is empty" << endl;
+			std::cout << "Stack is empty" << std::endl;
 			exit(1);
 		}
 	}
 
 	//получить верхний элеммент
-	T peak()
+	T peak() const
 	{
 		if (!isEmpty())
 		{
-			return top->data;
+			return top->getData();
 		}
 		else
 		{
-			cout << "Stack is empty" << endl;
+			std::cout << "Stack is empty" << std::endl;
 			exit(1);
 		}
 	}
