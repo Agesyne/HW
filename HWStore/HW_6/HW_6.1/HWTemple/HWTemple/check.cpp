@@ -30,14 +30,14 @@ void checkFromFile()
 	vector<string> results;
 	readFile("resultData.txt", results);
 
-	auto i_data = data.begin();
-	auto i_results = results.begin();
-	while (i_data != data.end() && i_results != results.end())
+	auto iData = data.begin();
+	auto iResults = results.begin();
+	while (iData != data.end() && iResults != results.end())
 	{
-		const int calcualtedResult = calculatePostFixForm(*i_data);
+		const int calcualtedResult = calculatePostFixForm(*iData);
 
 		int givenResult = 0;
-		for (const auto &symbol : *i_results)
+		for (const auto &symbol : *iResults)
 		{
 			givenResult = givenResult * 10 + symbol - '0';
 		}
@@ -47,7 +47,7 @@ void checkFromFile()
 			cout << "Mistakes";
 			exit(1);
 		}
-		++i_data;
-		++i_results;
+		++iData;
+		++iResults;
 	}
 }
