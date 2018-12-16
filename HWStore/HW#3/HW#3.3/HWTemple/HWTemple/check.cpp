@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "main.h"
 #include "algorithms.h"
 #include "readFile.h"
 #include <string.h>
@@ -35,46 +34,42 @@ void checkFromFile()
 	for (int linesCounter = 0; linesCounter < linesRead; linesCounter++)
 	{
 		//инициализация данных
-			char *buffer = data[linesCounter];	//обрабатываемая строка
-			int *enteredArray = nullptr;		//считываемый массив
-			int arraySize = 0;	
+		char *buffer = data[linesCounter];	//обрабатываемая строка
+		int *enteredArray = nullptr;		//считываемый массив
+		int arraySize = 0;	
+		int result = -1;					//контрольное значение к данному массиву
 
-
-			int result = -1;					//контрольное значение к данному массиву
-
-		
 		//обработка строки
-			processInputString(buffer, &enteredArray, &arraySize, &result);
+		processInputString(buffer, &enteredArray, &arraySize, &result);
 
-			
 		//сортировка
-			quickSort(enteredArray, 0, arraySize - 1);
+		quickSort(enteredArray, 0, arraySize - 1);
 
 		//вычисление контрольного значения
-			const int maxFrequencyNumber = findMaxFrequencyNumber(enteredArray, arraySize);
+		const int maxFrequencyNumber = findMaxFrequencyNumber(enteredArray, arraySize);
 
 		//проверка
-			if (result == -1 || maxFrequencyNumber == -1 || maxFrequencyNumber != result)
+		if (result == -1 || maxFrequencyNumber == -1 || maxFrequencyNumber != result)
+		{
+			if (result == -1)
 			{
-				if (result == -1)
-				{
-					printf("Wrong control number input\n");
-				}
-				else if (maxFrequencyNumber == -1)
-				{
-					printf("Wrong array file reading\n");
-				}
-				else
-				{
-					printf("Wrong calculating\n");
-				}
-				for (int i = linesCounter; i < linesRead; i++)
-				{
-					delete[] data[i];
-				}
-				delete[] enteredArray;
-				exit(1);
+				printf("Wrong control number input\n");
 			}
+			else if (maxFrequencyNumber == -1)
+			{
+				printf("Wrong array file reading\n");
+			}
+			else
+			{
+				printf("Wrong calculating\n");
+			}
+			for (int i = linesCounter; i < linesRead; i++)
+			{
+				delete[] data[i];
+			}
+			delete[] enteredArray;
+			exit(1);
+		}
 
 		delete[] enteredArray;
 		delete[] data[linesCounter];

@@ -10,13 +10,11 @@ int readFile(char text[], char *data[100])
 		exit(1);
 	}
 
-	//char *data[100] = {};
 	int linesRead = 0;
 
 	while (!feof(inputDataFile))
 	{
 		char *buffer = new char[100];
-		//const int readBytes = fscanf(inputDataFile, "%[^\n]", buffer);
 		char *readBytes = fgets(buffer, sizeof(char) * 100, inputDataFile);
 		if (readBytes == nullptr)
 		{

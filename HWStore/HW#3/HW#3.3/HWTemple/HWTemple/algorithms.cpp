@@ -1,7 +1,12 @@
 #include "pch.h"
 #include <iostream>
-#include "main.h"
 
+void swap(int *a, int *b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
 int partition(int sortingArray[], const int low, const int high)
 {
@@ -69,80 +74,19 @@ int findMaxFrequencyNumber(int enteredArray[], const int arraySize)
 
 void processInputString(const char buffer[], int *enteredArray[], int *arraySize, int *result)
 {
-	//инициализация данных
+	int arrayBeginning = 0;
+	sscanf(buffer, "Size = %d, Result = %d:%n", arraySize, result, &arrayBeginning);
+	*enteredArray = new int[*arraySize];
 
-	bool isArrayBegun = false;			//считываем ли уже массив
-	int arrayIndex = 0;
-
-	bool isNumberNext = false;			//если дальше число - считываем его
-	int numberCounter = 0;				//номер считанного числа
-
-
-	for (int charCounter = 0; buffer[charCounter] != '\n' && buffer[charCounter] != '\0'; charCounter++)
+	int cumulativeSum = 0;
+	for (int i = 0; i < *arraySize; ++i)
 	{
-		if (buffer[charCounter] == '=') //счётчик '='
-		{
-			isNumberNext = true;
-			numberCounter++;
-			charCounter++;
-			continue;
-		}
+		int number = 0;
+		int offset = 0;
 
-		if (isArrayBegun && buffer[charCounter] == ' ') //индикатор числа массива
-		{
-			isNumberNext = true;
-			continue;
-		}
+		sscanf(buffer + arrayBeginning + cumulativeSum, " %d%n", &number, &offset);
+		cumulativeSum += offset;
 
-		if (isNumberNext) //считывает число
-		{
-			int digitLength = 0;
-			for (int i = 0;;)
-			{
-				if (isdigit(buffer[charCounter + i]))
-				{
-					i++;
-				}
-				else
-				{
-					digitLength = i;
-					break;
-				}
-			}
-
-			int numberFromString = 0;
-			for (int i = 0; i < digitLength; i++)
-			{
-				numberFromString = numberFromString * 10 + (buffer[charCounter + i] - '0');
-			}
-
-			if (!isArrayBegun) //запись числа в нужное место
-			{
-				switch (numberCounter)
-				{
-				case 1:
-					*arraySize = numberFromString;
-					*enteredArray = new int[*arraySize];
-					break;
-				case 2:
-					*result = numberFromString;
-					break;
-				}
-			}
-			else
-			{
-				(*enteredArray)[arrayIndex++] = numberFromString;
-			}
-
-			charCounter += digitLength - 1;
-			isNumberNext = false;
-			continue;
-		}
-
-		if (buffer[charCounter] == ':') //начался массив
-		{
-			isArrayBegun = true;
-		}
-
+		(*enteredArray)[i] = number;
 	}
 }

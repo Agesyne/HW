@@ -154,7 +154,6 @@
     <ClInclude Include="algorithms.h" />
     <ClInclude Include="check.h" />
     <ClInclude Include="initialization.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="readFile.h" />
   </ItemGroup>
