@@ -30,6 +30,9 @@
     <ClInclude Include="readFile.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -48,6 +51,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="readFile.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="List.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
