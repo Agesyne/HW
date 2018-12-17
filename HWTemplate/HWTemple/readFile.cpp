@@ -14,6 +14,7 @@ int readFile(string text, vector<string> &data)
 		cout << "File not found!" << endl;
 		return 1;
 	}
+  
 	while (!inputDataFile.eof()) {
 		string buffer;
 		inputDataFile >> buffer;
@@ -23,5 +24,6 @@ int readFile(string text, vector<string> &data)
 		}
 		data.push_back(buffer);
 	}
+  
 	inputDataFile.close();
 }
