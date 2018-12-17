@@ -1,6 +1,9 @@
 .swp
 .main.c.swp
-**/.vs
+**/*.vs
+
 **/Debug
+
 **/Release
-**/.user
+
+**/*.user
