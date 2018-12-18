@@ -3,7 +3,11 @@
 **/*.vs
 
 **/Debug
-/*
+/
 **/Release
-/*
+/
 **/*.user
+**/*.tlog
+**/*.ilk
+**/*.obj
+**/*.log
