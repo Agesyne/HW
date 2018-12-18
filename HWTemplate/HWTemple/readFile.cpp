@@ -6,14 +6,15 @@
 #include "readFile.h"
 using namespace std;
 
-int readFile(string text, vector<string> &data)
+void readFile(string text, vector<string> &data)
 {
 	ifstream inputDataFile(text, ios::in);
 	if (!inputDataFile.is_open())
 	{
 		cout << "File not found!" << endl;
-		return 1;
+		return;
 	}
+
 	while (!inputDataFile.eof()) {
 		string buffer;
 		inputDataFile >> buffer;
@@ -23,5 +24,6 @@ int readFile(string text, vector<string> &data)
 		}
 		data.push_back(buffer);
 	}
+
 	inputDataFile.close();
 }
