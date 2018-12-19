@@ -23,6 +23,7 @@ AVLTree::AVLTree()
 
 AVLTree::~AVLTree()
 {
+	deleteAll();
 }
 
 
@@ -130,11 +131,15 @@ void balanceTree(Node *aBalanceNode, Node *bBalanceNode, Node *cBalanceNode, Nod
 	middleNode->parent = aParent;
 
 	leftNode->left = subTree1;
+	subTree1->parent = leftNode;
 	leftNode->right = subTree2;
+	subTree2->parent = leftNode;
 	leftNode->parent = middleNode;
 
 	rightNode->left = subTree3;
+	subTree3->parent = rightNode;
 	rightNode->right = subTree4;
+	subTree4->parent = rightNode;
 	rightNode->parent = middleNode;
 
 	countNodeBalance(leftNode);
@@ -142,7 +147,7 @@ void balanceTree(Node *aBalanceNode, Node *bBalanceNode, Node *cBalanceNode, Nod
 	countNodeBalance(middleNode);
 }
 
-void addFix(Node *addedNode, Node **root)
+void fixTree(Node *addedNode, Node **root)
 {
 	if (addedNode == *root || addedNode->parent == *root)
 	{
@@ -161,7 +166,7 @@ void addFix(Node *addedNode, Node **root)
 		if (bFactor > 1)
 		{
 			balanceTree(aBalanceNode, bBalanceNode, cBalanceNode, root);
-			addFix(addedNode, root);
+			fixTree(addedNode, root);
 			break;
 		}
 		cBalanceNode = bBalanceNode;
@@ -214,7 +219,7 @@ bool AVLTree::add(string key, string data)
 	}
 
 	++size;
-	addFix(newNode, &root);
+	fixTree(newNode, &root);
 	return true;
 }
 
@@ -317,7 +322,9 @@ bool AVLTree::erase(string key)
 	}
 
 	--size;
+	Node *fixingNode = successorNode->parent;
 	delete successorNode;
+	fixTree(fixingNode, &root);
 	return true;
 }
 
@@ -342,4 +349,25 @@ bool AVLTree::checkIfExist(string key) const
 	}
 
 	return false;
+}
+
+
+void deleteTree(Node *currentNode)
+{
+	if (currentNode == nullptr)
+	{
+		return;
+	}
+
+	deleteTree(currentNode->left);
+	deleteTree(currentNode->right);
+
+	delete currentNode;
+}
+
+
+void AVLTree::deleteAll()
+{
+	deleteTree(root);
+	root = nullptr;
 }

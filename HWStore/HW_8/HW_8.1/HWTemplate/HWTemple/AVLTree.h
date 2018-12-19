@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-extern struct Node;
+struct Node;
 
 class AVLTree
 {
@@ -19,5 +19,7 @@ public:
 	bool erase(std::string key);
 
 	bool checkIfExist(std::string key) const;
+
+	void deleteAll();
 };
 
