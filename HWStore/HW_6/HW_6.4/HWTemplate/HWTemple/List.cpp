@@ -13,12 +13,6 @@ struct ListElement
 	ListElement *next;
 };
 
-struct ArrayElement
-{
-	string name;
-	string phoneNumber;
-};
-
 List::List()
 {
 }
@@ -27,6 +21,23 @@ List::List()
 List::~List()
 {
 	deleteList();
+}
+
+// Begin with 0
+ListElement *List::at(const int number) const
+{
+	if (number >= size)
+	{
+		return nullptr;
+	}
+
+	ListElement *current = head;
+	for (int i = 0; i < number; ++i)
+	{
+		current = current->next;
+	}
+
+	return current;
 }
 
 void List::pushBack(const string &name, const string &phoneNumber)
@@ -45,7 +56,7 @@ void List::pushBack(const string &name, const string &phoneNumber)
 }
 
 //true <=> 1-й больше
-bool compareRecords(const ArrayElement &record1, const ArrayElement &record2, const bool isOrderByNames)
+bool compareRecords(const ListElement &record1, const ListElement &record2, const bool isOrderByNames)
 {
 	if (isOrderByNames)
 	{
@@ -57,39 +68,41 @@ bool compareRecords(const ArrayElement &record1, const ArrayElement &record2, co
 	}
 }
 
-void merge(ArrayElement sortingArray[], const int low, const int high, const bool isOrderByNames)
+List *List::merge(const int low, const int high, const bool isOrderByNames)
 {
 	if (low >= high)
 	{
-		return;
+		auto oneElementList = new List;
+		oneElementList->pushBack(at(low)->name, at(low)->phoneNumber);
+		return oneElementList;
 	}
 	const int middle = (low + high) / 2;
 
-	merge(sortingArray, low, middle, isOrderByNames);
-	merge(sortingArray, middle + 1, high, isOrderByNames);
+	auto leftList = merge(low, middle, isOrderByNames);
+	auto rightList = merge(middle + 1, high, isOrderByNames);
 
-	auto extraArray = new ArrayElement[high - low + 1];
-	int i = low;
-	int j = middle + 1;
+	auto newSortingList = new List;
+	int i = 0;
+	int j = 0;
 	for (int k = 0; k <= high - low; ++k)
 	{
 		if (i != -1 && j != -1)
 		{
-			bool isFirstGreater = compareRecords(sortingArray[i], sortingArray[j], isOrderByNames);
+			bool isFirstGreater = compareRecords(*leftList->at(i), *rightList->at(j), isOrderByNames);
 			if (isFirstGreater)
 			{
-				extraArray[k] = sortingArray[j];
+				newSortingList->pushBack(rightList->at(j)->name, rightList->at(j)->phoneNumber);
 				++j;
-				if (j > high)
+				if (j >= rightList->size)
 				{
 					j = -1;
 				}
 			}
 			else
 			{
-				extraArray[k] = sortingArray[i];
+				newSortingList->pushBack(leftList->at(i)->name, leftList->at(i)->phoneNumber);
 				++i;
-				if (i > middle)
+				if (i >= leftList->size)
 				{
 					i = -1;
 				}
@@ -106,18 +119,18 @@ void merge(ArrayElement sortingArray[], const int low, const int high, const boo
 			{
 				if (i == -1)
 				{
-					extraArray[k] = sortingArray[j];
+					newSortingList->pushBack(rightList->at(j)->name, rightList->at(j)->phoneNumber);
 					++j;
-					if (j > high)
+					if (j >= rightList->size)
 					{
 						j = -1;
 					}
 				}
 				else
 				{
-					extraArray[k] = sortingArray[i];
+					newSortingList->pushBack(leftList->at(i)->name, leftList->at(i)->phoneNumber);
 					++i;
-					if (i > middle)
+					if (i >= leftList->size)
 					{
 						i = -1;
 					}
@@ -126,37 +139,27 @@ void merge(ArrayElement sortingArray[], const int low, const int high, const boo
 		}
 	}
 
-	for (int k = low; k <= high; ++k)
-	{
-		sortingArray[k] = extraArray[k - low];
-	}
-	delete[] extraArray;
+	delete leftList;
+	delete rightList;
+	return newSortingList;
 }
 
 void List::mergeSort(const bool isOrderByNames)
 {
-	auto sortingArray = new ArrayElement[size];
-	int low = 0;
-	int high = size - 1;
-
-	int counter = 0;
-	for (auto current = head; current != nullptr; current = current->next)
+	List *sortedList = merge(0, size - 1, isOrderByNames);
+	
+	if (size > 1)
 	{
-		sortingArray[counter] = ArrayElement{ current->name, current->phoneNumber };
-		++counter;
+		auto current = head;
+		for (int i = 0; i <= size - 1; ++i)
+		{
+			current->name = sortedList->at(i)->name;
+			current->phoneNumber = sortedList->at(i)->phoneNumber;
+			current = current->next;
+		}
 	}
 
-	merge(sortingArray, low, high, isOrderByNames);
-
-	auto current = head;
-	for (int i = low; i <= high; ++i)
-	{
-		current->name = sortingArray[i].name;
-		current->phoneNumber = sortingArray[i].phoneNumber;
-		current = current->next;
-	}
-
-	delete[] sortingArray;
+	delete sortedList;
 }
 
 void List::printList() const
@@ -184,9 +187,7 @@ bool List::isSorted(const bool isOrderByNames) const
 	bool isSorted = true;
 	for (auto current = head; current != tail; current = current->next)
 	{
-		ArrayElement record1{current->name, current->phoneNumber};
-		ArrayElement record2{current->next->name, current->next->phoneNumber };
-		if (compareRecords(record1, record2, isOrderByNames))
+		if (compareRecords(*current, *(current->next), isOrderByNames))
 		{
 			isSorted = false;
 			break;
