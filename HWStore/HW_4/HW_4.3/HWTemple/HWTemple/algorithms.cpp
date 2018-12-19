@@ -257,46 +257,6 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 		break;
 
 	case 5:
-		/*commandOffset++;
-		while (true)
-		{
-			sscanf(buffer + commandOffset + counter, "%1[0-9.A-Za-z]", &ch);
-			counter++;
-			if (isspace(ch) || ch == '\0')
-			{
-				printf("Неверный аргумент комманды: (%s)\n", url);
-				break;
-			}
-
-			url[counter] = ch;
-			if (ch == '.')
-			{
-				break;
-			}
-		}
-
-		if (isspace(ch) || ch == '\0')
-		{
-			break;
-		}
-
-		while (true)
-		{
-			sscanf(buffer + commandOffset + counter, "%1[a-z]", &ch);
-			counter++;
-			if (isspace(ch) || ch == '\0')
-			{
-				printf("Неверный аргумент комманды: (%s)\n", url);
-				break;
-			}
-
-			url[counter] = ch;
-			if (ch == '.')
-			{
-				break;
-			}
-		}*/
-
 		sscanf(buffer + commandOffset, " %[0-9A-Za-z]%n.", url, &counter);
 		if (buffer[commandOffset + counter] != '.')
 		{
