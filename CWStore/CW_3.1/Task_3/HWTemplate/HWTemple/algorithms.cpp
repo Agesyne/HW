@@ -16,9 +16,9 @@ void checkAllVertex(Graph &map, vector<vector<bool>> &isReacheable)
 
 bool isReacheableFromEverywhere(const int vertexNumber, const vector<vector<bool>> &isReacheable)
 {
-	for (const auto &i : isReacheable[vertexNumber])
+	for (int i = 0; i < isReacheable.size(); ++i)
 	{
-		if (i == false)
+		if (isReacheable[i][vertexNumber] == false)
 		{
 			return false;
 		}
