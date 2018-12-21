@@ -439,7 +439,7 @@ void printAllData(BlackRedTree *tree, Node *currentNode = nullptr, FILE *outputF
 	}
 }
 
-void deletetAllData(BlackRedTree *tree, Node *currentNode = nullptr)
+void deleteAllData(BlackRedTree *tree, Node *currentNode = nullptr)
 {
 	if (currentNode == nullptr)
 	{
@@ -448,12 +448,12 @@ void deletetAllData(BlackRedTree *tree, Node *currentNode = nullptr)
 
 	if (currentNode->left != LEAF)
 	{
-		deletetAllData(tree, currentNode->left);
+		deleteAllData(tree, currentNode->left);
 	}
 
 	if (currentNode->right != LEAF)
 	{
-		deletetAllData(tree, currentNode->right);
+		deleteAllData(tree, currentNode->right);
 	}
 
 	tree->size--;

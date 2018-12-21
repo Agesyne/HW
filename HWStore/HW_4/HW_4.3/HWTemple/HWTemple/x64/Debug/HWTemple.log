@@ -1,1 +1,8 @@
-﻿  HWTemple.vcxproj -> C:\Users\Agesyne3\Desktop\Git Repos For University HW\HW\HWStore\HW_4\HW_4.3\HWTemple\x64\Debug\HWTemple.exe
+﻿  algorithms.cpp
+c:\users\agesyne3\desktop\git repos for university hw\hw\hwstore\hw_4\hw_4.3\hwtemple\hwtemple\algorithms.cpp(141): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\agesyne3\desktop\git repos for university hw\hw\hwstore\hw_4\hw_4.3\hwtemple\hwtemple\algorithms.cpp(157): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\agesyne3\desktop\git repos for university hw\hw\hwstore\hw_4\hw_4.3\hwtemple\hwtemple\algorithms.cpp(203): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\agesyne3\desktop\git repos for university hw\hw\hwstore\hw_4\hw_4.3\hwtemple\hwtemple\algorithms.cpp(235): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\agesyne3\desktop\git repos for university hw\hw\hwstore\hw_4\hw_4.3\hwtemple\hwtemple\algorithms.cpp(288): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'int'
+c:\users\agesyne3\desktop\git repos for university hw\hw\hwstore\hw_4\hw_4.3\hwtemple\hwtemple\algorithms.cpp(288): warning C4313: 'printf': '%s' in format string conflicts with argument 1 of type 'int'
+  HWTemple.vcxproj -> C:\Users\Agesyne3\Desktop\Git Repos For University HW\HW\HWStore\HW_4\HW_4.3\HWTemple\x64\Debug\HWTemple.exe

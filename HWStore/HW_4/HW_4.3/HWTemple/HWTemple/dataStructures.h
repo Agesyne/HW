@@ -40,4 +40,4 @@ Node *findData(BlackRedTree *tree, phoneNumberRecord *data,
 
 void printAllData(BlackRedTree *tree, Node *currentNode = nullptr, FILE *outputFile = nullptr);
 
-void deletetAllData(BlackRedTree *tree, Node *currentNode = nullptr);
+void deleteAllData(BlackRedTree *tree, Node *currentNode = nullptr);

@@ -21,6 +21,12 @@ int readFile(const char text[], char *data[100])
 			delete[] buffer;
 			break;
 		}
+
+		if (buffer[strlen(buffer) - 1] == '\n')
+		{
+			buffer[strlen(buffer) - 1] = '\0';
+		}
+
 		data[linesRead++] = buffer;
 	}
 

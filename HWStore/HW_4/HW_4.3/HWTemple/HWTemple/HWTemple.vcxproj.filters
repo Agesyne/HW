@@ -70,5 +70,20 @@
     <Text Include="checkData.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+    <Text Include="checkData1.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="checkData2.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="resultData.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="resultData1ByNames.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="resultData1ByNumbers.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>
