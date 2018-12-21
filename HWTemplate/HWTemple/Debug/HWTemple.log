@@ -1,0 +1,9 @@
+﻿  pch.cpp
+  algorithms.cpp
+  check.cpp
+  initialization.cpp
+  main.cpp
+  readFile.cpp
+  Generating Code...
+c:\users\agesyne3\desktop\git repos for university hw\hw\hwtemplate\hwtemple\readfile.cpp(27): warning C4715: 'readFile': not all control paths return a value
+  HWTemple.vcxproj -> C:\Users\Agesyne3\Desktop\Git Repos For University HW\HW\HWTemplate\Debug\HWTemple.exe
