@@ -174,7 +174,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="checkData.txt" />
+    <Text Include="checkData1.txt" />
     <Text Include="data.txt" />
+    <Text Include="resultData.txt" />
+    <Text Include="resultData1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

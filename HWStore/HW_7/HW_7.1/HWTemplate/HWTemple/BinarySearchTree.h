@@ -1,6 +1,7 @@
 #pragma once
+#include <string>
 
-extern struct Node;
+struct Node;
 
 class BinarySearchTree
 {
@@ -17,7 +18,7 @@ public:
 
 	bool erase(const int data);
 
-	void printAll(const bool isStraightOrder = true, Node *rootNode = nullptr) const;
+	void printAll(const bool isStraightOrder = true, Node *rootNode = nullptr, const std::string &text = "") const;
 
 	void deleteAll(Node *rootNode = nullptr);
 };

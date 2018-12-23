@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "BinarySearchTree.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 struct Node
@@ -169,7 +170,7 @@ bool BinarySearchTree::erase(const int data)
 	return true;
 }
 
-void BinarySearchTree::printAll(const bool isStraightOrder, Node *currentNode) const
+void BinarySearchTree::printAll(const bool isStraightOrder, Node *currentNode, const string &text) const
 {
 	static int counter = -1;
 	if (counter == -1 && currentNode == nullptr)
@@ -185,29 +186,47 @@ void BinarySearchTree::printAll(const bool isStraightOrder, Node *currentNode) c
 
 	if (isStraightOrder)
 	{
-		printAll(isStraightOrder, currentNode->left);
+		printAll(isStraightOrder, currentNode->left, text);
 	}
 	else
 	{
-		printAll(isStraightOrder, currentNode->right);
+		printAll(isStraightOrder, currentNode->right, text);
 	}
 
-	cout << "(" << currentNode->data << ")->";
+	if (text == "")
+	{
+		cout << "(" << currentNode->data << ")->";
+	}
+	else
+	{
+		ofstream outputFile(text, ios::app);
+		outputFile << "(" << currentNode->data << ")->";
+		outputFile.close();
+	}
 
 	if (isStraightOrder)
 	{
-		printAll(isStraightOrder, currentNode->right);
+		printAll(isStraightOrder, currentNode->right, text);
 	}
 	else
 	{
-		printAll(isStraightOrder, currentNode->left);
+		printAll(isStraightOrder, currentNode->left, text);
 	}
 
 	++counter;
 	if (counter == size)
 	{
 		counter = -1;
-		cout << "[]" << endl;
+		if (text == "")
+		{
+			cout << "[]" << endl;
+		}
+		else
+		{
+			ofstream outputFile(text, ios::app);
+			outputFile << "[]" << endl;
+			outputFile.close();
+		}
 	}
 }
 
@@ -239,5 +258,6 @@ void BinarySearchTree::deleteAll(Node *currentNode)
 	{
 		counter = -1;
 		size = 0;
+		root = nullptr;
 	}
 }
