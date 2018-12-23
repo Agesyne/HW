@@ -12,14 +12,16 @@ public:
 	AVLTree();
 	~AVLTree();
 
-	bool add(std::string key, std::string data);
+	bool add(const std::string data, const std::string key = "");
 
-	std::string find(std::string key) const;
+	std::string find(const std::string key) const;
 
-	bool erase(std::string key);
+	bool erase(const std::string key);
 
-	bool checkIfExist(std::string key) const;
+	bool checkIfExist(const std::string key) const;
 
 	void deleteAll();
+
+	void printAll(const std::string &text);
 };
 

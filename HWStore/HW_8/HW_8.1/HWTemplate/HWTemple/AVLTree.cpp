@@ -2,7 +2,9 @@
 #include "AVLTree.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <algorithm>
+#include "algorithms.h"
 using namespace std;
 
 struct Node
@@ -78,9 +80,9 @@ void balanceTree(Node *aBalanceNode, Node *bBalanceNode, Node *cBalanceNode, Nod
 		}
 		else
 		{
-			subTree1 = cBalanceNode->left;
+			subTree1 = bBalanceNode->left;
 			subTree2 = cBalanceNode->left;
-			subTree3 = bBalanceNode->right;
+			subTree3 = cBalanceNode->right;
 			subTree4 = aBalanceNode->right;
 			leftNode = bBalanceNode;
 			rightNode = aBalanceNode;
@@ -130,17 +132,32 @@ void balanceTree(Node *aBalanceNode, Node *bBalanceNode, Node *cBalanceNode, Nod
 	middleNode->right = rightNode;
 	middleNode->parent = aParent;
 
+
 	leftNode->left = subTree1;
-	subTree1->parent = leftNode;
+	if (subTree1 != nullptr)
+	{
+		subTree1->parent = leftNode;
+	}
 	leftNode->right = subTree2;
-	subTree2->parent = leftNode;
+	if (subTree2 != nullptr)
+	{
+		subTree2->parent = leftNode;
+	}
 	leftNode->parent = middleNode;
 
+
 	rightNode->left = subTree3;
-	subTree3->parent = rightNode;
+	if (subTree3 != nullptr)
+	{
+		subTree3->parent = rightNode;
+	}
 	rightNode->right = subTree4;
-	subTree4->parent = rightNode;
+	if (subTree4 != nullptr)
+	{
+		subTree4->parent = rightNode;
+	}
 	rightNode->parent = middleNode;
+
 
 	countNodeBalance(leftNode);
 	countNodeBalance(rightNode);
@@ -167,7 +184,7 @@ void fixTree(Node *addedNode, Node **root)
 		{
 			balanceTree(aBalanceNode, bBalanceNode, cBalanceNode, root);
 			fixTree(addedNode, root);
-			break;
+			return;
 		}
 		cBalanceNode = bBalanceNode;
 		bBalanceNode = aBalanceNode;
@@ -175,8 +192,13 @@ void fixTree(Node *addedNode, Node **root)
 	}
 }
 
-bool AVLTree::add(string key, string data)
+bool AVLTree::add(string data, string key)
 {
+	if (key == "")
+	{
+		key = getHash(data);
+	}
+
 	auto newNode = new Node{ key, data, nullptr, nullptr, nullptr, 0, 0 };
 	if (root == nullptr)
 	{
@@ -209,7 +231,7 @@ bool AVLTree::add(string key, string data)
 	}
 
 	newNode->parent = currentParent;
-	if (data < currentParent->data)
+	if (key < currentParent->key)
 	{
 		currentParent->left = newNode;
 	}
@@ -223,7 +245,7 @@ bool AVLTree::add(string key, string data)
 	return true;
 }
 
-string AVLTree::find(string key) const
+string AVLTree::find(const string key) const
 {
 	Node *current = root;
 	while (current != nullptr)
@@ -246,7 +268,7 @@ string AVLTree::find(string key) const
 	return "";
 }
 
-bool AVLTree::erase(string key)
+bool AVLTree::erase(const string key)
 {
 	Node *current = root;
 	while (current != nullptr)
@@ -328,7 +350,7 @@ bool AVLTree::erase(string key)
 	return true;
 }
 
-bool AVLTree::checkIfExist(string key) const
+bool AVLTree::checkIfExist(const string key) const
 {
 	Node *current = root;
 	while (current != nullptr)
@@ -370,4 +392,29 @@ void AVLTree::deleteAll()
 {
 	deleteTree(root);
 	root = nullptr;
+}
+
+
+void printAllTree(const Node *current, ofstream &outputFile)
+{
+	if (current == nullptr)
+	{
+		return;
+	}
+
+	printAllTree(current->left, outputFile);
+
+	outputFile << "(" << current->key << ":" << current->data << ")->";
+
+	printAllTree(current->right, outputFile);
+}
+
+void AVLTree::printAll(const string &text)
+{
+	ofstream outputFile(text, ios::trunc);
+
+	printAllTree(root, outputFile);
+	outputFile << "[]" << endl;
+
+	outputFile.close();
 }
