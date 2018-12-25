@@ -7,10 +7,24 @@
 using namespace std;
 
 
+bool isAllAdded(Graph &map)
+{
+	for (int i = 0; i < map.getSize(); ++i)
+	{
+		if (!map[i].isGotCountry)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 void formCountries(const int capitalNumber, const int citiesNumber, vector<vector<GraphField *>> &countries, Graph &map)
 {
 	// Перебираем всё количество вершин
-	for (int counter = 0; counter < citiesNumber - capitalNumber; ++counter)
+	int counter = 0;
+	while (!isAllAdded(map))
 	{
 		bool isChosen = false;
 		GraphField *addingVertex = nullptr;
@@ -38,5 +52,7 @@ void formCountries(const int capitalNumber, const int citiesNumber, vector<vecto
 			addingVertex->isGotCountry = true;
 			countries[counter % capitalNumber].push_back(addingVertex);
 		}
+
+		counter++;
 	}
 }
