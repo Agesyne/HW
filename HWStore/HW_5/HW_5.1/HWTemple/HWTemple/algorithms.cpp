@@ -57,204 +57,59 @@ void printHelp()
 
 void processInputCommand(const char buffer[], DoubleLinkedList *list, int *commandNumber)
 {
-	const int maxNumberCommandArgument = 2;
-	char *commandArgument[maxNumberCommandArgument]{};
-	bool isDataNext = true;
-	int dataCounter = 0;
+	int commandOffset = 0;
+	sscanf(buffer, "%d%n", commandNumber, &commandOffset);
 
-	for (int charCounter = 0; buffer[charCounter] != '\n' && buffer[charCounter] != '\0'; charCounter++)
+	if (*commandNumber < 0 || *commandNumber > 3)
 	{
-		if (buffer[charCounter] == ' ' && !isDataNext)
-		{
-			isDataNext = true;
-			continue;
-		}
-
-		if (isDataNext)
-		{
-			int dataLength = 0;
-			for (int i = 0;;)
-			{
-				bool isStillData = isspace(buffer[charCounter + 1]) != 0;
-				if (isStillData)
-				{
-					i++;
-				}
-				else
-				{
-					dataLength = i;
-					break;
-				}
-			}
-
-			char *dataFromString = new char[100]{};
-			for (int i = 0; i < dataLength; i++)
-			{
-				dataFromString[i] = buffer[charCounter + i];
-			}
-
-			if (dataCounter >= maxNumberCommandArgument)
-			{
-				printf("Лишний аргумент комманды: (%s)\n", dataFromString);
-				printHelp();
-				for (int i = 0; i < maxNumberCommandArgument; i++)
-				{
-					delete[] commandArgument[i];
-				}
-				delete[] dataFromString;
-				return;
-			}
-			commandArgument[dataCounter++] = dataFromString;
-
-			charCounter += dataLength - 1;
-			isDataNext = false;
-			continue;
-		}
-	}
-
-	if (strlen(commandArgument[0]) > 1 || !isdigit(commandArgument[0][0]))
-	{
-		printf("Неверный номер комманды: %s\n", commandArgument[0]);
+		printf("Невреный номер команды: %d\n", *commandNumber);
 		printHelp();
-		for (int i = 0; i < maxNumberCommandArgument; i++)
-		{
-			delete[] commandArgument[i];
-		}
 		return;
 	}
-	*commandNumber = commandArgument[0][0] - '0';
+
+	if (*commandNumber < 0 || *commandNumber > 3)
+	{
+		printf("Неверный номер комманды: %s\n", *commandNumber);
+		printHelp();
+	}
 
 	int data = 0;
-	int sign = 1;
-	int argumentLength = 0;
-	int argumentCharCounter = 0;
-	bool hasBadArgument = false;
 	switch (*commandNumber)
 	{
 		case 0:
-			if (commandArgument[1] != nullptr)
-			{
-				printf("Лишний аргумент комманды: (%s)\n", commandArgument[1]);
-				*commandNumber = -1;
-			}
-		break;
+			break;
 
 		case 1:
-			if (commandArgument[1] == nullptr)
-			{
-				printf("Неверный аргумент комманды: (%s)\n", commandArgument[1]);
-				printHelp();
-				break;
-			}
-
-			argumentLength = strlen(commandArgument[1]);
-			if (argumentLength > 10)
-			{
-				printf("Неверный аргумент комманды (больше 10 символов): (%s)\n", commandArgument[1]);
-				printHelp();
-				break;
-			}
-
-			if (commandArgument[1][0] == '-' || commandArgument[1][0] == '+')
-			{
-				if (commandArgument[1][0] == '-')
-				{
-					sign = -1;
-				}
-				argumentCharCounter++;
-			}
-
-			for (; argumentCharCounter < argumentLength; argumentCharCounter++)
-			{
-				if (!isdigit(commandArgument[1][argumentCharCounter]))
-				{
-					printf("Неверный аргумент комманды: (%s)\n", commandArgument[1]);
-					hasBadArgument = true;
-					break;
-				}
-				data = data * 10 + (commandArgument[1][argumentCharCounter] - '0');
-			}
-
-			if (hasBadArgument)
-			{
-				break;
-			}
-
-			data *= sign;
-
+			sscanf(buffer + commandOffset, " %d", data);
 			insertElementToList(list, data, &printInsertingData);
-		break;
+			break;
 
 		case 2:
-			if (commandArgument[1] == nullptr)
-			{
-				printf("Неверный аргумент комманды: (%s)\n", commandArgument[1]);
-				printHelp();
-				break;
-			}
-			argumentLength = strlen(commandArgument[1]);
-			if (argumentLength > 10)
-			{
-				printf("Неверный аргумент комманды (больше 10 символов): (%s)\n", commandArgument[1]);
-				printHelp();
-				break;
-			}
-
-			if (commandArgument[1][0] == '-' || commandArgument[1][0] == '+')
-			{
-				if (commandArgument[1][0] == '-')
-				{
-					sign = -1;
-				}
-				argumentCharCounter++;
-			}
-
-			for (; argumentCharCounter < argumentLength; argumentCharCounter++)
-			{
-				if (!isdigit(commandArgument[1][argumentCharCounter]))
-				{
-					printf("Неверный аргумент комманды: (%s)\n", commandArgument[1]);
-					hasBadArgument = true;
-					break;
-				}
-				data = data * 10 + (commandArgument[1][argumentCharCounter] - '0');
-			}
-
-			if (hasBadArgument)
-			{
-				break;
-			}
-
-			data *= sign;
-
+			sscanf(buffer + commandOffset, " %d", data);
 			deleteElmentFromList(list, data, &printDeletingData);
-		break;
+			break;
 
 		case 3:
-			if (commandArgument[1] == nullptr || (strlen(commandArgument[1]) == 1 && commandArgument[1][0] == '0'))
+			sscanf(buffer + commandOffset, " %d", data);
+			if (data == 0)
 			{
 				printAllData(list);
 			}
-			else if (strlen(commandArgument[1]) == 1 && commandArgument[1][0] == '1')
+			else if (data == 1)
 			{
 				printAllData(list, false);
 			}
 			else
 			{
-				printf("Неверный аргумент комманды: (%s)\n", commandArgument[1]);
+				printf("Неверный аргумент комманды: (%s)\n", data);
 				printHelp();
 				break;
 			}
-		break;
+			break;
 
 		default:
-			printf("Неверный номер комманды: %s\n", commandArgument[0]);
+			printf("Неверный номер комманды: %s\n", *commandNumber);
 			printHelp();
-		break;
-	}
-
-	for (int i = 0; i < maxNumberCommandArgument; i++)
-	{
-		delete[] commandArgument[i];
+			break;
 	}
 }

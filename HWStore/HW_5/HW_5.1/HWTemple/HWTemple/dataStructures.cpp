@@ -1,20 +1,6 @@
 #include "pch.h"
 #include <stdio.h>
-
-struct ListElement
-{
-	int data;
-	ListElement *next;
-	ListElement *prev;
-};
-
-struct DoubleLinkedList
-{
-	int size = 0;
-	ListElement *head = nullptr;
-	ListElement *tail = nullptr;
-};
-
+#include "dataStructures.h"
 
 bool isEmpty(DoubleLinkedList *list)
 {
@@ -120,7 +106,10 @@ void deleteElmentFromList(DoubleLinkedList *list, const int data, void(*printDat
 			}
 
 			delete current;
-			printData(data, true);
+			if (printData != nullptr)
+			{
+				printData(data, true);
+			}
 			list->size--;
 			return;
 		}
