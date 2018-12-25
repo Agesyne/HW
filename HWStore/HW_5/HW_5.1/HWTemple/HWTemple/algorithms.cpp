@@ -67,12 +67,6 @@ void processInputCommand(const char buffer[], DoubleLinkedList *list, int *comma
 		return;
 	}
 
-	if (*commandNumber < 0 || *commandNumber > 3)
-	{
-		printf("Неверный номер комманды: %s\n", *commandNumber);
-		printHelp();
-	}
-
 	int data = 0;
 	switch (*commandNumber)
 	{
@@ -80,17 +74,17 @@ void processInputCommand(const char buffer[], DoubleLinkedList *list, int *comma
 			break;
 
 		case 1:
-			sscanf(buffer + commandOffset, " %d", data);
+			sscanf(buffer + commandOffset, " %d", &data);
 			insertElementToList(list, data, &printInsertingData);
 			break;
 
 		case 2:
-			sscanf(buffer + commandOffset, " %d", data);
+			sscanf(buffer + commandOffset, " %d", &data);
 			deleteElmentFromList(list, data, &printDeletingData);
 			break;
 
 		case 3:
-			sscanf(buffer + commandOffset, " %d", data);
+			sscanf(buffer + commandOffset, " %d", &data);
 			if (data == 0)
 			{
 				printAllData(list);
