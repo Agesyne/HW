@@ -8,7 +8,7 @@ bool isEmpty(DoubleLinkedList *list)
 }
 
 
-void insertElementToList(DoubleLinkedList *list, const int data, void(*printData)(const int data) = nullptr)
+void insertElementToList(DoubleLinkedList *list, const int data, void(*printData)(const int data))
 {
 	if (isEmpty(list))
 	{
@@ -64,7 +64,7 @@ void insertElementToList(DoubleLinkedList *list, const int data, void(*printData
 	list->size++;
 }
 
-void deleteElmentFromList(DoubleLinkedList *list, const int data, void(*printData)(const int data, bool hasFound) = nullptr)
+void deleteElmentFromList(DoubleLinkedList *list, const int data, void(*printData)(const int data, bool hasFound))
 {
 	if (isEmpty(list))
 	{
@@ -119,7 +119,7 @@ void deleteElmentFromList(DoubleLinkedList *list, const int data, void(*printDat
 }
 
 
-void printAllData(DoubleLinkedList *list, bool isStraightOrder = true, FILE *outputFile = nullptr)
+void printAllData(DoubleLinkedList *list, bool isStraightOrder, FILE *outputFile)
 {
 	if (isEmpty(list))
 	{
