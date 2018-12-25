@@ -42,9 +42,9 @@ void checkFromFile()
 		BlackRedTree treeByNumbers;
 
 		char *data[100] = {};
-		const int commandslinesRead = readFile(checkData[linesCounter], data);
+		const int commandsLinesRead = readFile(checkData[linesCounter], data);
 
-		for (int i = 0; i < commandslinesRead; ++i)
+		for (int i = 0; i < commandsLinesRead; ++i)
 		{
 			int commandNumber = 0;
 			processInputCommand(data[i], &treeByNames, &treeByNumbers, &commandNumber);
@@ -99,9 +99,9 @@ void checkFromFile()
 		if (!(isSameByNames && isSameByNumbers))
 		{
 			printf("Mistakes\n");
-			for (int i = linesCounter; i < commandslinesRead; ++i)
+			for (int i = linesCounter; i < commandsLinesRead; ++i)
 			{
-				deleteTMPData(commandslinesRead, data);
+				deleteTMPData(commandsLinesRead, data);
 				deleteTMPData(resultByNamesLinesRead, resultByNames);
 				deleteTMPData(answerByNamesLinesRead, answerByNames);
 				deleteTMPData(resultByNumbersLinesRead, resultByNumbers);
@@ -113,7 +113,7 @@ void checkFromFile()
 		}
 
 		// Удаление промежуточных данных
-		deleteTMPData(commandslinesRead, data);
+		deleteTMPData(commandsLinesRead, data);
 		deleteTMPData(resultByNamesLinesRead, resultByNames);
 		deleteTMPData(answerByNamesLinesRead, answerByNames);
 		deleteTMPData(resultByNumbersLinesRead, resultByNumbers);

@@ -6,7 +6,7 @@ int readFile(const char text[], char *data[100])
 	FILE *inputDataFile = fopen(text, "r");
 	if (!inputDataFile)
 	{
-		printf("File not fount");
+		printf("File not found");
 		exit(1);
 	}
 

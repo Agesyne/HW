@@ -5,8 +5,8 @@
 #define BLACK 0
 #define RED 1
 
-//по большей части слизано с algolist
-struct phoneNumberRecord
+//по большей части слизано с algoList
+struct PhoneNumberRecord
 {
 	char name[32];
 	char phoneNumber[20];
@@ -14,14 +14,14 @@ struct phoneNumberRecord
 
 struct Node
 {
-	phoneNumberRecord data;
+	PhoneNumberRecord data;
 	Node *left;
 	Node *right;
 	Node *parent;
 	int color;
 };
 
-Node *leaf = new Node{ phoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
+Node *leaf = new Node{ PhoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
 
 #define LEAF leaf
 
@@ -165,8 +165,8 @@ void insertFixup(BlackRedTree *tree ,Node *checkingNode)
 
 
 
-Node *insertNode(BlackRedTree *insertingTree, phoneNumberRecord *data, 
-						bool (*compareIfLessOrEqual)(phoneNumberRecord, phoneNumberRecord))
+Node *insertNode(BlackRedTree *insertingTree, PhoneNumberRecord *data, 
+						bool (*compareIfLessOrEqual)(PhoneNumberRecord, PhoneNumberRecord))
 {
 	Node *current = insertingTree->root;
 	Node *parent = nullptr;
@@ -347,9 +347,9 @@ void deleteNode(BlackRedTree *tree, Node *deletingNode)
 	delete successorNode;
 }
 
-void printAllEqual(Node *leftBorderNode, Node *rightBorderNode, phoneNumberRecord *data,
-					bool(*compareIfEqual)(phoneNumberRecord, phoneNumberRecord),
-						bool(*printData)(phoneNumberRecord),
+void printAllEqual(Node *leftBorderNode, Node *rightBorderNode, PhoneNumberRecord *data,
+					bool(*compareIfEqual)(PhoneNumberRecord, PhoneNumberRecord),
+						bool(*printData)(PhoneNumberRecord),
 							Node *currentNode = nullptr)
 {
 	if (currentNode == nullptr)
@@ -373,10 +373,10 @@ void printAllEqual(Node *leftBorderNode, Node *rightBorderNode, phoneNumberRecor
 	}
 }
 
-Node *findData(BlackRedTree *tree, phoneNumberRecord *data,
-				bool(*compareIfEqual)(phoneNumberRecord, phoneNumberRecord),
-					bool(*compareIfLessOrEqual)(phoneNumberRecord, phoneNumberRecord),
-						bool(*printData)(phoneNumberRecord) = nullptr)
+Node *findData(BlackRedTree *tree, PhoneNumberRecord *data,
+				bool(*compareIfEqual)(PhoneNumberRecord, PhoneNumberRecord),
+					bool(*compareIfLessOrEqual)(PhoneNumberRecord, PhoneNumberRecord),
+						bool(*printData)(PhoneNumberRecord) = nullptr)
 {
 	Node *current = tree->root;
 	while (current != LEAF)

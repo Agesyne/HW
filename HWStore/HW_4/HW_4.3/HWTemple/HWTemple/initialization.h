@@ -4,16 +4,16 @@ int initNumber(const char[]);
 
 void initArray(const char text[], int initingArray[], int arraySize);
 
-struct dictionaryRecord
+struct DictionaryRecord
 {
 	char name[100];
 	char phoneNumber[15];
 };
 
-struct list
+struct List
 {
-	list *next;
-	list *prev;
+	List *next;
+	List *prev;
 
-	dictionaryRecord dictionaryRecord;
+	DictionaryRecord data;
 };

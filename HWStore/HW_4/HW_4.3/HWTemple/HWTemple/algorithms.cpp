@@ -5,6 +5,8 @@
 #include "dataStructures.h"
 #include "saveToFile.h"
 
+const int maxSizeOfNameBuffer = 32;
+const int maxSizeOfPhoneNumberBuffer = 20;
 
 void swap(int *a, int *b)
 {
@@ -26,46 +28,41 @@ int max(const int number1, const int number2)
 }
 
 
-bool compareIfEqualByName(phoneNumberRecord a, phoneNumberRecord b)
+bool compareIfEqualByName(PhoneNumberRecord a, PhoneNumberRecord b)
 {
-	return strcmp(a.name,b.name) == 0;
+	return strcmp(a.name, b.name) == 0;
 }
-bool compareIfLessOrEqualByName(phoneNumberRecord a, phoneNumberRecord b)
+
+bool compareIfLessOrEqualByName(PhoneNumberRecord a, PhoneNumberRecord b)
 {
 	return strcmp(a.name, b.name) <= 0;
 }
 
-bool compareIfEqualByNumber(phoneNumberRecord a, phoneNumberRecord b)
+bool compareIfEqualByNumber(PhoneNumberRecord a, PhoneNumberRecord b)
 {
 	return strcmp(a.phoneNumber, b.phoneNumber) == 0;
 }
-bool compareIfLessOrEqualByNumber(phoneNumberRecord a, phoneNumberRecord b)
+
+bool compareIfLessOrEqualByNumber(PhoneNumberRecord a, PhoneNumberRecord b)
 {
 	return strcmp(a.phoneNumber, b.phoneNumber) <= 0;
 }
 
-bool printData(phoneNumberRecord a)
+bool printData(PhoneNumberRecord a)
 {
 	printf("Имя: %s\tНомер: %s\n", a.name, a.phoneNumber);
 	return false;
 }
 
-
 void processInputString(const char buffer[], BlackRedTree *dataBaseByName, BlackRedTree *dataBaseByNumber)
 {
-	char name[32]{};
-	char phoneNumber[20]{};
+	char name[maxSizeOfNameBuffer]{};
+	char phoneNumber[maxSizeOfPhoneNumberBuffer]{};
 	sscanf(buffer, "Имя: %[A-z], Телефонный номер: %s", &name, &phoneNumber);
 
-	phoneNumberRecord *newRecord = new phoneNumberRecord{};
-	for (int i = 0; i < 32; i++)
-	{
-		if (i < 20)
-		{
-			newRecord->phoneNumber[i] = phoneNumber[i];
-		}
-		newRecord->name[i] = name[i];
-	}
+	PhoneNumberRecord *newRecord = new PhoneNumberRecord{};
+	strcpy(newRecord->phoneNumber, phoneNumber);
+	strcpy(newRecord->name, name);
 
 	insertNode(dataBaseByName, newRecord, &compareIfLessOrEqualByName);
 	insertNode(dataBaseByNumber, newRecord, &compareIfLessOrEqualByNumber);
@@ -113,7 +110,7 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 		return;
 	}
 
-	phoneNumberRecord *newRecord = new phoneNumberRecord{};
+	PhoneNumberRecord *newRecord = new PhoneNumberRecord{};
 	char *name = new char[100]{};
 	int inputtedNameLength = 0;
 	char *phoneNumber = new char[100]{};
@@ -139,35 +136,20 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 		}
 
 		inputtedNameLength = strlen(name);
-		if (inputtedNameLength > 32)
+		if (inputtedNameLength > maxSizeOfNameBuffer)
 		{
 			printf("Неверный формат имени (больше 32 символов): %s\n", name);
 			break;
 		}
-
-		for (int i = 0; i < 32; i++)
-		{
-			if (i >= inputtedNameLength)
-			{
-				break;
-			}
-			newRecord->name[i] = name[i];
-		}
+		strcpy(newRecord->name, name);
 
 		inputtedNumberLength = strlen(phoneNumber);
-		if (inputtedNumberLength > 20)
+		if (inputtedNumberLength > maxSizeOfPhoneNumberBuffer)
 		{
 			printf("Неверный формат номера (больше 20 символов): %s\n", phoneNumber);
 			break;
 		}
-		for (int i = 0; i < 20; i++)
-		{
-			if (i >= inputtedNumberLength)
-			{
-				break;
-			}
-			newRecord->phoneNumber[i] = phoneNumber[i];
-		}
+		strcpy(newRecord->phoneNumber, phoneNumber);
 
 		insertNode(dataBaseByName, newRecord, &compareIfLessOrEqualByName);
 		insertNode(dataBaseByNumber, newRecord, &compareIfLessOrEqualByNumber);
@@ -201,20 +183,13 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 			break;
 		}
 		inputtedNameLength = strlen(name);
-		if (inputtedNameLength > 32)
+		if (inputtedNameLength > maxSizeOfNameBuffer)
 		{
 			printf("Неверный формат имени (больше 32 символов): %s\n", name);
 			break;
 		}
 
-		for (int i = 0; i < 32; i++)
-		{
-			if (i >= inputtedNameLength)
-			{
-				break;
-			}
-			newRecord->name[i] = name[i];
-		}
+		strcpy(newRecord->name, name);
 
 		askedData = findData(dataBaseByName, newRecord, &compareIfEqualByName, &compareIfLessOrEqualByName, &printData);
 		if (askedData == nullptr || askedData == LEAF)
@@ -233,19 +208,12 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 			break;
 		}
 		inputtedNumberLength = strlen(phoneNumber);
-		if (inputtedNumberLength > 32)
+		if (inputtedNumberLength > maxSizeOfNameBuffer)
 		{
 			printf("Неверный формат номера (больше 20 символов): %s\n", phoneNumber);
 			break;
 		}
-		for (int i = 0; i < 20; i++)
-		{
-			if (i >= inputtedNumberLength)
-			{
-				break;
-			}
-			newRecord->phoneNumber[i] = phoneNumber[i];
-		}
+		strcpy(newRecord->phoneNumber, phoneNumber);
 
 
 		askedData = findData(dataBaseByNumber, newRecord, &compareIfEqualByNumber, &compareIfLessOrEqualByNumber, &printData);

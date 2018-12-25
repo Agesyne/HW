@@ -1,18 +1,18 @@
 #include "pch.h"
 #include <iostream>
 
-struct dictionaryRecord
+struct DictionaryRecord
 {
 	char name[100];
 	char phoneNumber[15];
 };
 
-struct list
+struct List
 {
-	list *next;
-	list *prev;
+	List *next;
+	List *prev;
 
-	dictionaryRecord dictionaryRecord;
+	DictionaryRecord data;
 };
 
 int initNumber(const char text[])
