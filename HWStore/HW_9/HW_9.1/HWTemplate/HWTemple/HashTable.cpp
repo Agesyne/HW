@@ -14,7 +14,7 @@ HashTable::HashTable(size_t initSize)
 	map.resize(initSize);
 }
 
-bool HashTable::find(string sourse)
+bool HashTable::find(const string &sourse)
 {
 	const int keyNumber = hashFunction(sourse) % map.size();
 
@@ -29,7 +29,7 @@ bool HashTable::find(string sourse)
 	return false;
 }
 
-void HashTable::add(string sourse)
+void HashTable::add(const string &sourse)
 {
 	const int key = hashFunction(sourse) % map.size();
 
@@ -45,7 +45,7 @@ void HashTable::add(string sourse)
 	mbResize();
 }
 
-void HashTable::erase(string sourse)
+void HashTable::erase(const string &sourse)
 {
 	const int key = hashFunction(sourse) % map.size();
 
@@ -59,7 +59,7 @@ void HashTable::erase(string sourse)
 	}
 }
 
-void HashTable::printAllData(const string text)
+void HashTable::printAllData(const string &text)
 {
 	if (text != "")
 	{

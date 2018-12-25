@@ -2,7 +2,7 @@
 #include <list>
 #include <vector>
 
-#define INIT_SIZE 16
+const int INIT_SIZE = 16;
 
 class HashTable
 {
@@ -14,12 +14,12 @@ public:
 
 	void mbResize();
 
-	bool find(const std::string sourse);
+	bool find(const std::string &sourse);
 
-	void add(const std::string sourse);
+	void add(const std::string &sourse);
 
-	void erase(const std::string sourse);
+	void erase(const std::string &sourse);
 
-	void printAllData(const std::string text = "");
+	void printAllData(const std::string &text = "");
 };
 

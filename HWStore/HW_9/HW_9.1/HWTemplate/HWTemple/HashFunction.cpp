@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "HashFunction.h"
-#include <iostream>
+#include <algorithm>
 #include <string>
 using namespace std;
 
@@ -15,5 +15,5 @@ int hashFunction(string sourse)
 		multiplier *= 3;
 	}
 
-	return key;
+	return abs(key);
 }
