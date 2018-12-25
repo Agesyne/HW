@@ -23,7 +23,7 @@ int max(const int number1, const int number2)
 	}
 }
 
-void prinInsertingtData(const int data)
+void printInsertingData(const int data)
 {
 	printf("Ёлемент %d добавлен\n", data);
 }
@@ -75,9 +75,7 @@ void processInputCommand(const char buffer[], DoubleLinkedList *list, int *comma
 			int dataLength = 0;
 			for (int i = 0;;)
 			{
-				bool isStillData = (buffer[charCounter + i] != ' ')
-					&& (buffer[charCounter + i] != '\n')
-					&& (buffer[charCounter + i] != '\0');
+				bool isStillData = isspace(buffer[charCounter + 1]) != 0;
 				if (isStillData)
 				{
 					i++;
@@ -184,7 +182,7 @@ void processInputCommand(const char buffer[], DoubleLinkedList *list, int *comma
 
 			data *= sign;
 
-			insertElementToList(list, data, &prinInsertingtData);
+			insertElementToList(list, data, &printInsertingData);
 		break;
 
 		case 2:
