@@ -2,6 +2,7 @@
 
 #define BLACK 0
 #define RED 1
+#define LEAF leaf
 
 struct PhoneNumberRecord
 {
@@ -18,9 +19,7 @@ struct Node
 	int color;
 };
 
-Node *leaf = new Node{ PhoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
-
-#define LEAF leaf
+extern Node *leaf;
 
 struct BlackRedTree
 {

@@ -6,6 +6,8 @@
 #define BLACK 0
 #define RED 1
 
+Node *leaf = new Node{ PhoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
+
 void rotateLeft(BlackRedTree *tree, Node *rotatingNode)
 {
 	Node *rightSubTree = rotatingNode->right;
@@ -350,7 +352,7 @@ void printAllEqual(Node *leftBorderNode, Node *rightBorderNode, PhoneNumberRecor
 Node *findData(BlackRedTree *tree, PhoneNumberRecord *data,
 				bool(*compareIfEqual)(PhoneNumberRecord, PhoneNumberRecord),
 					bool(*compareIfLessOrEqual)(PhoneNumberRecord, PhoneNumberRecord),
-						bool(*printData)(PhoneNumberRecord) = nullptr)
+						bool(*printData)(PhoneNumberRecord))
 {
 	Node *current = tree->root;
 	while (current != LEAF)
@@ -386,7 +388,7 @@ Node *findData(BlackRedTree *tree, PhoneNumberRecord *data,
 	return current;
 }
 
-void printAllData(BlackRedTree *tree, Node *currentNode = nullptr, FILE *outputFile = nullptr)
+void printAllData(BlackRedTree *tree, Node *currentNode, FILE *outputFile)
 {
 	if (currentNode == nullptr)
 	{
@@ -413,7 +415,7 @@ void printAllData(BlackRedTree *tree, Node *currentNode = nullptr, FILE *outputF
 	}
 }
 
-void deleteAllData(BlackRedTree *tree, Node *currentNode = nullptr)
+void deleteAllData(BlackRedTree *tree, Node *currentNode)
 {
 	if (currentNode == nullptr)
 	{
