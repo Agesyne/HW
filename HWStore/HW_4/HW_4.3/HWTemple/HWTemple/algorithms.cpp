@@ -259,7 +259,7 @@ void processInputCommand(const char buffer[], BlackRedTree *dataBaseByName, Blac
 	}
 
 	delete newRecord;
-	delete name;
-	delete phoneNumber;
-	delete url;
+	delete name[];
+	delete phoneNumber[];
+	delete url[];
 }

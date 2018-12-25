@@ -1,36 +1,10 @@
 #include "pch.h"
 #include <iostream>
 #include <string.h>
+#include "dataStructures.h"
 
 #define BLACK 0
 #define RED 1
-
-//по большей части слизано с algoList
-struct PhoneNumberRecord
-{
-	char name[32];
-	char phoneNumber[20];
-};
-
-struct Node
-{
-	PhoneNumberRecord data;
-	Node *left;
-	Node *right;
-	Node *parent;
-	int color;
-};
-
-Node *leaf = new Node{ PhoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
-
-#define LEAF leaf
-
-struct BlackRedTree
-{
-	Node *root = LEAF;
-	int size = 0;
-};
-
 
 void rotateLeft(BlackRedTree *tree, Node *rotatingNode)
 {

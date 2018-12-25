@@ -18,7 +18,7 @@ struct Node
 	int color;
 };
 
-extern Node *leaf;
+Node *leaf = new Node{ PhoneNumberRecord{}, leaf, leaf, nullptr, BLACK };
 
 #define LEAF leaf
 
