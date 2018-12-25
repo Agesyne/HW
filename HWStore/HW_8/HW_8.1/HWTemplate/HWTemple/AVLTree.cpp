@@ -22,13 +22,10 @@ AVLTree::AVLTree()
 {
 }
 
-
 AVLTree::~AVLTree()
 {
 	deleteAll();
 }
-
-
 
 void countNodeBalance(Node *currentNode)
 {
@@ -192,17 +189,11 @@ void fixTree(Node *addedNode, Node **root)
 	}
 }
 
-bool AVLTree::add(string data, string key)
+bool AVLTree::add(const string &data, const string &key)
 {
-	if (key == "")
-	{
-		key = getHash(data);
-	}
-
-	auto newNode = new Node{ key, data, nullptr, nullptr, nullptr, 0, 0 };
 	if (root == nullptr)
 	{
-		root = newNode;
+		root = new Node{ key, data, nullptr, nullptr, nullptr, 0, 0 };
 		++size;
 		return true;
 	}
@@ -215,7 +206,6 @@ bool AVLTree::add(string data, string key)
 
 		if (key == current->key)
 		{
-			delete newNode;
 			current->data = data;
 			return false;
 		}
@@ -230,6 +220,7 @@ bool AVLTree::add(string data, string key)
 		}
 	}
 
+	auto newNode = new Node{ key, data, nullptr, nullptr, nullptr, 0, 0 };
 	newNode->parent = currentParent;
 	if (key < currentParent->key)
 	{
@@ -245,7 +236,7 @@ bool AVLTree::add(string data, string key)
 	return true;
 }
 
-string AVLTree::find(const string key) const
+string AVLTree::find(const string &key) const
 {
 	Node *current = root;
 	while (current != nullptr)
@@ -268,7 +259,7 @@ string AVLTree::find(const string key) const
 	return "";
 }
 
-bool AVLTree::erase(const string key)
+bool AVLTree::erase(const string &key)
 {
 	Node *current = root;
 	while (current != nullptr)
@@ -350,7 +341,7 @@ bool AVLTree::erase(const string key)
 	return true;
 }
 
-bool AVLTree::checkIfExist(const string key) const
+bool AVLTree::checkIfExist(const string &key) const
 {
 	Node *current = root;
 	while (current != nullptr)
@@ -373,7 +364,6 @@ bool AVLTree::checkIfExist(const string key) const
 	return false;
 }
 
-
 void deleteTree(Node *currentNode)
 {
 	if (currentNode == nullptr)
@@ -387,13 +377,11 @@ void deleteTree(Node *currentNode)
 	delete currentNode;
 }
 
-
 void AVLTree::deleteAll()
 {
 	deleteTree(root);
 	root = nullptr;
 }
-
 
 void printAllTree(const Node *current, ofstream &outputFile)
 {
