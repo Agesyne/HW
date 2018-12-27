@@ -1,0 +1,18 @@
+CC=cl
+CFLAGS=-c
+NOFLAGS=
+NOWARNINGSFLAG=/EHsc
+SOURCES=main.cpp check.cpp algorithms.cpp initialization.cpp readFile.cpp
+OBJECTS=$(SOURCES:.cpp=.obj)
+EXECUTABLE=make
+
+all: $(SOURCES) $(EXECUTABLE) clean
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(NOFLAGS) $(OBJECTS) -o $@
+
+.cpp.obj:
+	$(CC) $(CFLAGS) $< $(NOWARNINGSFLAG)
+
+clean:
+	del $(OBJECTS)
