@@ -28,10 +28,8 @@ vector<int> *prefixFunction(const string &data)
 	return prefixData;
 }
 
-string findFirstEntrance(const string &sourse, const string &data)
+string findFirstEntrance(const string &sourse, const string &data, vector<int> *prefixData)
 {
-	auto prefixData = prefixFunction(data);
-
 	int j = 0;
 	for (int i = 0; i < sourse.length(); ++i)
 	{
@@ -56,6 +54,8 @@ string findFirstEntrance(const string &sourse, const string &data)
 
 void findFirstEntranceInFile(const vector<string> &sourseStrings, const string &data, const string &outputFileName)
 {
+	auto prefixData = prefixFunction(data);
+
 	if (outputFileName != "")
 	{
 		ofstream outputFileStream(outputFileName, ios::trunc);
@@ -64,7 +64,7 @@ void findFirstEntranceInFile(const vector<string> &sourseStrings, const string &
 
 	for (int i = 0; i < sourseStrings.size(); ++i)
 	{
-		string answer = findFirstEntrance(sourseStrings[i], data);
+		string answer = findFirstEntrance(sourseStrings[i], data, prefixData);
 		if (answer != "")
 		{
 			if (outputFileName != "")
@@ -96,4 +96,6 @@ void findFirstEntranceInFile(const vector<string> &sourseStrings, const string &
 			cout << sourseStrings[i] << endl;
 		}
 	}
+
+	delete prefixData;
 }
